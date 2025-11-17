@@ -18,10 +18,10 @@ public class ResultAnalyzer extends JFrame {
     private int numSubjects;
 
     public ResultAnalyzer() {
-        // 1. Ask for number of subjects
+        
         String input = JOptionPane.showInputDialog(null, "Enter Number of Subjects:", "Setup", JOptionPane.QUESTION_MESSAGE);
         try {
-            if (input == null) System.exit(0); // Exit if user clicks Cancel
+            if (input == null) System.exit(0); 
             numSubjects = Integer.parseInt(input);
             if (numSubjects <= 0) throw new NumberFormatException();
         } catch (Exception e) {
@@ -34,11 +34,11 @@ public class ResultAnalyzer extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        // --- Logo Panel & Debugging ---
+        
         JPanel logoPanel = new JPanel();
         logoPanel.setBackground(Color.WHITE);
 
-        // LOGIC: Check if file exists. If not, show a POPUP with the path.
+        
         File imageFile = new File("images.png");
         if (!imageFile.exists()) {
             JOptionPane.showMessageDialog(this,
@@ -59,10 +59,10 @@ public class ResultAnalyzer extends JFrame {
         }
         add(logoPanel, BorderLayout.NORTH);
 
-        // --- Inputs Panel (Scrollable) ---
+        
         JPanel inputsContainer = new JPanel(new BorderLayout());
 
-        // Header Row
+      
         JPanel headerPanel = new JPanel(new GridLayout(1, 3, 10, 10));
         headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         headerPanel.add(new JLabel("Subject Name", SwingConstants.CENTER));
@@ -70,7 +70,7 @@ public class ResultAnalyzer extends JFrame {
         headerPanel.add(new JLabel("Credits", SwingConstants.CENTER));
         inputsContainer.add(headerPanel, BorderLayout.NORTH);
 
-        // Dynamic Rows
+        
         JPanel gridPanel = new JPanel(new GridLayout(numSubjects, 3, 10, 10));
         gridPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
@@ -79,17 +79,17 @@ public class ResultAnalyzer extends JFrame {
         creditFields = new JTextField[numSubjects];
 
         for (int i = 0; i < numSubjects; i++) {
-            // Column 1: Subject Name (Editable)
+            
             subjectNameFields[i] = new JTextField("Subject " + (i + 1));
             subjectNameFields[i].setHorizontalAlignment(JTextField.CENTER);
             gridPanel.add(subjectNameFields[i]);
 
-            // Column 2: Marks
+            
             markFields[i] = new JTextField();
             markFields[i].setHorizontalAlignment(JTextField.CENTER);
             gridPanel.add(markFields[i]);
 
-            // Column 3: Credits
+            
             creditFields[i] = new JTextField("3");
             creditFields[i].setHorizontalAlignment(JTextField.CENTER);
             gridPanel.add(creditFields[i]);
@@ -99,7 +99,7 @@ public class ResultAnalyzer extends JFrame {
         scrollPane.setBorder(null);
         inputsContainer.add(scrollPane, BorderLayout.CENTER);
 
-        // Calculate Button
+        
         JButton calculateButton = new JButton("Calculate CGPA");
         calculateButton.setBackground(new Color(70, 130, 180));
         calculateButton.setForeground(Color.WHITE);
@@ -111,7 +111,7 @@ public class ResultAnalyzer extends JFrame {
 
         add(inputsContainer, BorderLayout.CENTER);
 
-        // --- Bottom Panel (Graph & Result) ---
+        
         JPanel bottomPanel = new JPanel(new BorderLayout());
 
         graphPanel = new BarGraphPanel();
@@ -292,4 +292,5 @@ public class ResultAnalyzer extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ResultAnalyzer::new);
     }
+
 }
